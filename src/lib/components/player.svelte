@@ -257,7 +257,7 @@
 				<div class="mb-6 text-center text-white">
 					<h2 class="text-2xl font-bold md:text-3xl">{$currentTrack?.title || 'Unknown Title'}</h2>
 					<p class="mt-2 text-lg text-neutral-400">
-						{$currentTrack?.artist || 'Unknown Artist'} • {$currentTrack?.album || 'Unknown Album'}
+						{$currentTrack?.artist || 'Unknown Artist'}
 					</p>
 				</div>
 
