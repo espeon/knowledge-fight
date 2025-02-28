@@ -1,12 +1,11 @@
-
 <script>
-    export let href = '#';
-    export let text = '';
-  </script>
+	export let href = '#';
+	export let text = '';
+</script>
 
-  <a 
-    {href} 
-    class="group hover:text-black hover:bg-slate-400 px-3 rounded-full w-screen max-w-max"
-  >
-    {text}
-  </a>
+<a
+	{href}
+	class="group w-screen max-w-max rounded-full bg-slate-300/30 px-3 transition-colors hover:bg-slate-400 dark:bg-slate-700/30 dark:hover:bg-slate-700"
+>
+	{text}
+</a>

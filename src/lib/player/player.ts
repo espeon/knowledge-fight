@@ -1,116 +1,116 @@
-import { writable, readable } from "svelte/store";
+import { writable, readable } from 'svelte/store';
 
 class AudioPlayer {
-    audioElement: HTMLAudioElement;
+	audioElement: HTMLAudioElement;
 
-    duration: ReturnType<typeof readable<number>>;
-    currentTime: ReturnType<typeof readable<number>>;
-    //volume: ReturnType<typeof readable<number>>;
-    playbackRate: ReturnType<typeof readable<number>>;
-    //muted: ReturnType<typeof readable<boolean>>;
+	duration: ReturnType<typeof readable<number>>;
+	currentTime: ReturnType<typeof readable<number>>;
+	//volume: ReturnType<typeof readable<number>>;
+	playbackRate: ReturnType<typeof readable<number>>;
+	//muted: ReturnType<typeof readable<boolean>>;
 
-    constructor() {
-        this.audioElement = new Audio();
+	constructor() {
+		this.audioElement = new Audio();
 
-        this.duration = readable(0, (set) => {
-            const onDurationChange = () => {
-                set(this.audioElement.duration);
-            };
-        
-            // Add event listener
-            this.audioElement.addEventListener('durationchange', onDurationChange);
-        
-            return () => { 
-                // Cleanup: Remove the event listener when the store is no longer needed
-                this.audioElement.removeEventListener('durationchange', onDurationChange); 
-            };
-        });
+		this.duration = readable(0, (set) => {
+			const onDurationChange = () => {
+				set(this.audioElement.duration);
+			};
 
-        this.currentTime = readable(0, (set) => {
-            const onTimeChange = () => {
-                set(this.audioElement.currentTime)
-            }
-            this.audioElement.addEventListener('timeupdate', onTimeChange)
-            return () => {
-                this.audioElement.removeEventListener('timeupdate', onTimeChange)
-            }
-        });
+			// Add event listener
+			this.audioElement.addEventListener('durationchange', onDurationChange);
 
-        this.playbackRate = readable(0, (set) => {
-            const onPlaybackRateChange = () =>{
-                set(this.audioElement.playbackRate)
-            }
-            this.audioElement.addEventListener('playbackrate', onPlaybackRateChange)
-            return () => {
-                this.audioElement.removeEventListener('playbackrate', onPlaybackRateChange)
-            }
-        });
-    }
+			return () => {
+				// Cleanup: Remove the event listener when the store is no longer needed
+				this.audioElement.removeEventListener('durationchange', onDurationChange);
+			};
+		});
 
-    playCurrent(path: string) {
-        this.audioElement.src = path;
-        this.audioElement.play();
-    }
+		this.currentTime = readable(0, (set) => {
+			const onTimeChange = () => {
+				set(this.audioElement.currentTime);
+			};
+			this.audioElement.addEventListener('timeupdate', onTimeChange);
+			return () => {
+				this.audioElement.removeEventListener('timeupdate', onTimeChange);
+			};
+		});
 
-    play() {
-        this.audioElement.play();
-    }
+		this.playbackRate = readable(0, (set) => {
+			const onPlaybackRateChange = () => {
+				set(this.audioElement.playbackRate);
+			};
+			this.audioElement.addEventListener('playbackrate', onPlaybackRateChange);
+			return () => {
+				this.audioElement.removeEventListener('playbackrate', onPlaybackRateChange);
+			};
+		});
+	}
 
-    pause() {
-        this.audioElement.pause();
-    }
+	playCurrent(path: string) {
+		this.audioElement.src = path;
+		this.audioElement.play();
+	}
 
-    isPlaying() {
-        console.log(this)
-        console.log("Is playing:", this.audioElement.buffered)
-        return !this.audioElement.paused;
-    }
+	play() {
+		this.audioElement.play();
+	}
 
-    setVolume(volume: number) {
-        this.audioElement.volume = volume;
-    }
+	pause() {
+		this.audioElement.pause();
+	}
 
-    getVolume() {
-        return this.audioElement.volume;
-    }
+	isPlaying() {
+		console.log(this);
+		console.log('Is playing:', this.audioElement.buffered);
+		return !this.audioElement.paused;
+	}
 
-    setPlaybackRate(rate: number) {
-        this.audioElement.playbackRate = rate;
-    }
+	setVolume(volume: number) {
+		this.audioElement.volume = volume;
+	}
 
-    getPlaybackRate() {
-        return this.audioElement.playbackRate;
-    }
+	getVolume() {
+		return this.audioElement.volume;
+	}
 
-    setMuted(muted: boolean) {
-        this.audioElement.muted = muted;
-    }
+	setPlaybackRate(rate: number) {
+		this.audioElement.playbackRate = rate;
+	}
 
-    getMuted() {
-        return this.audioElement.muted;
-    }
+	getPlaybackRate() {
+		return this.audioElement.playbackRate;
+	}
 
-    setCurrentTime(time: number) {
-        this.audioElement.currentTime = time;
-    }
+	setMuted(muted: boolean) {
+		this.audioElement.muted = muted;
+	}
 
-    getCurrentTime() {
-        return this.audioElement.currentTime;
-    }
+	getMuted() {
+		return this.audioElement.muted;
+	}
+
+	setCurrentTime(time: number) {
+		this.audioElement.currentTime = time;
+	}
+
+	getCurrentTime() {
+		return this.audioElement.currentTime;
+	}
 }
 
 export { AudioPlayer };
 
 export interface Track {
-    id: string;
-    path: string;
-    title: string;
-    artist: string;
-    album?: string;
-    img?: string;
+	id: string;
+	path: string;
+	title: string;
+	artist: string;
+	album?: string;
+	cover?: string;
 }
 
 export interface Playlist {
-    songs: Track[];
-    index: number;
+	songs: Track[];
+	index: number;
 }

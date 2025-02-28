@@ -4,8 +4,8 @@
 	export let data;
 </script>
 
-<div class="pb-2 leading-relaxed space-y-2">
-	<p class='text-lg font-semibold'>Our podcast is nearly impossible to sell to you.</p>
+<div class="space-y-2 pb-2 leading-relaxed">
+	<p class="text-lg font-semibold">Our podcast is nearly impossible to sell to you.</p>
 	<p>
 		We primarily talk a bunch about how Alex Jones is an idiot and intentionally misleads his
 		listeners for fun and profit, but that's not the whole story. We also branch off into the nature
@@ -39,14 +39,15 @@
 		Check out our archive of episodes where we fully document and make fun of all the racist,
 		misogynist, and outright deceitful things that Alex Jones says every day on his show.
 		<br /><br />
-		We know, we know...it sounds horrible and unlistenable, but we promise, we make it funny.
+		We know, we know... it sounds horrible and unlistenable, but we promise, we make it funny.
 	</p>
 	{#each data.castData as item}
 		<Episode cast={item} meta={data.meta} />
 	{/each}
-	<div
-		class="flex h-full justify-center rounded-full bg-purple-300 py-1 pl-4 pr-2 align-baseline text-lg"
+	<a
+		href="/episodes"
+		class="mt-4 flex h-full justify-center rounded-full bg-slate-300 py-1 pr-2 pl-4 align-baseline text-lg shadow-md transition-colors hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-700"
 	>
 		More <iconify-icon height="1.25em" class="mt-0.5" icon="lucide:chevron-right" />
-	</div>
+	</a>
 </div>
